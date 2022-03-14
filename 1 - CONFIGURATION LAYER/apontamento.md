@@ -107,3 +107,99 @@ Consult with your Genesys Sales Engineer and Genesys Technical Support for speci
 
 Consulte seu engenheiro de vendas da Genesys e o suporte técnico da Genesys para obter versões e requisitos específicos. Você também pode encontrar informações sobre bancos de dados suportados no Genesys 8.x Supported Operating Systems and Databases Reference Manual.
 
+## 1.6 Configuration Server
+
+The functions of Configuration Server:
+
+-  Centralized configuration data storage
+- Data integrity control
+- Access Control
+- Runtime notifications
+
+As funções do Servidor de Configuração:
+
+- Armazenamento de dados de configuração centralizado
+- Controle de integridade de dados
+- Controle de acesso
+- Notificações de tempo de execução
+
+
+Configuration Server provides centralized access to the Configuration Database, based on permissions that administrators can grant to any user for any configuration object. 
+
+Configuration Server also maintains the logical integrity of configuration data and notifies the applications about the changes made to the data.
+
+
+O Configuration Server fornece acesso centralizado ao banco de dados de configuração, com base nas permissões que os administradores podem conceder a qualquer usuário para qualquer objeto de configuração.
+
+O Configuration Server também mantém a integridade lógica dos dados de configuração e notifica os aplicativos sobre as alterações feitas nos dados.
+
+![image](https://user-images.githubusercontent.com/52088444/158190275-33a9c476-0e9c-4e58-9f9f-7829a775a031.png)
+
+The clients of Configuration Server, such as T-Server, will not start unless they successfully connect to the Configuration Server. This is because most applications cannot perform any essential functions without access to the configuration data. Clients do not have to remain connected to the Configuration Server to stay operational. They will continue working with the configuration data they have already read into their own memory. On a reconnect, they will receive new and/or changed configuration data that the Configuration Server maintains in a history log for this purpose.
+
+Os clientes do Configuration Server, como o T-Server, não serão iniciados a menos que se conectem com sucesso ao Configuration Server. Isso ocorre porque a maioria dos aplicativos não pode executar nenhuma função essencial sem acesso aos dados de configuração. Os clientes não precisam permanecer conectados ao Servidor de Configuração para permanecerem operacionais. Eles continuarão trabalhando com os dados de configuração que já leram em sua própria memória. Em uma reconexão, eles receberão dados de configuração novos e/ou alterados que o Servidor de Configuração mantém em um log de histórico para essa finalidade.
+
+## 1.7 Starting Configuration Layer
+
+Your first step is starting the Configuration Server application. As outlined in the following image, (1) Configuration Server reads its configuration file—confserv.cfg which contains the information about how to access Configuration Database.
+
+Sua primeira etapa é iniciar o aplicativo Configuration Server. Conforme descrito na imagem a seguir, (1) o Configuration Server lê seu arquivo de configuração—confserv.cfg que contém as informações sobre como acessar o banco de dados de configuração.
+
+![image](https://user-images.githubusercontent.com/52088444/158191231-53649ef4-e0d8-413d-9f7c-409b782fea91.png)
+
+Using the information from the confserv.cfg file, Configuration Server then locates and establishes a connection to Config DB, (2) requesting the configuration data. Config DB returns the configuration data to the Configuration Server. 
+
+Usando as informações do arquivo confserv.cfg, o Configuration Server localiza e estabelece uma conexão com o Config DB, (2) solicitando os dados de configuração. O Config DB retorna os dados de configuração para o Configuration Server.
+
+![image](https://user-images.githubusercontent.com/52088444/158192718-24ac660e-7eb2-4799-9fc6-ac6c6710a6ca.png)
+
+When you launch the GUI application (based on the details supplied in its login dialog box), Genesys Administrator Extension (GAX) or Genesys Administrator (GA) locates and establishes a connection with Configuration Server. Then, GAX or GA requests and receives the configuration data from the Configuration Server.
+
+This process of Configuration Server loading all the configuration data into its memory is called initialization.
+
+Ao iniciar o aplicativo GUI (com base nos detalhes fornecidos em sua caixa de diálogo de login), o Genesys Administrator Extension (GAX) ou o Genesys Administrator (GA) localiza e estabelece uma conexão com o Configuration Server. Em seguida, o GAX ou GA solicita e recebe os dados de configuração do Configuration Server.
+
+Esse processo de carregamento de todos os dados de configuração do Configuration Server em sua memória é chamado de inicialização.
+
+![image](https://user-images.githubusercontent.com/52088444/158193433-4ce88bec-0108-43fb-b964-07656db8c996.png)
+
+The Configuration Layer can be started manually or automatically in Windows using Services (UNIX/LINUX daemon processes), or manually from a command line, an application shortcut, or a script.
+
+A Camada de Configuração pode ser iniciada manualmente ou automaticamente no Windows usando Serviços (processos de daemon UNIX/LINUX) ou manualmente a partir de uma linha de comando, um atalho de aplicativo ou um script.
+
+
+## 1.8 Configuration Data: Read
+
+At this point, the Configuration Server has already obtained the data from the database which is held in its memory.
+
+Neste ponto, o Configuration Server já obteve os dados do banco de dados que estão em sua memória.
+
+As seen in the image below:
+
+Como pode ser visto na imagem abaixo:
+
+When a (1) read request for information is sent to the Configuration Server from one of the Genesys applications, either a GUI (GAX or GA) or another Genesys server application, the Configuration Server responds with the requested (2) configuration data.
+
+Quando uma (1) solicitação de leitura de informações é enviada ao Servidor de Configuração de um dos aplicativos Genesys, seja uma GUI (GAX ou GA) ou outro aplicativo de servidor Genesys, o Servidor de Configuração responde com os (2) dados de configuração solicitados.
+
+![image](https://user-images.githubusercontent.com/52088444/158194159-3eee4ad2-cd49-49bd-8f86-16efede58b5b.png)
+
+Notice that the Configuration Server does not need to re-read data from the database to answer these read requests since all the configuration data is held in memory.
+
+Observe que o Configuration Server não precisa reler os dados do banco de dados para responder a essas solicitações de leitura, pois todos os dados de configuração são mantidos na memória.
+
+## 1.9 Configuration Data: Write
+
+![image](https://user-images.githubusercontent.com/52088444/158194582-b3e446a5-81cc-4a37-9545-6d1430ef0afa.png)
+
+Every time a change is made, all client applications are supplied with dynamic updates relevant to the functions they perform, as seen in the image above:
+
+1 -  Write—A request to update configuration data (a write process) is sent from a Genesys GUI application or server application.
+
+2 - Write—Configuration Server sends a message to DBMS requesting updates be made to the Configuration Database.
+
+3 - Configuration Data—The DBMS communicates the success of statements, along with a refresh of the configuration data.
+
+4 - Dynamic Update—Configuration Server sends changes in the configuration to relevant clients.
+
+

@@ -216,3 +216,158 @@ Para organizar os diferentes tipos de números de diretório em pastas, clique e
 
 ![image](https://user-images.githubusercontent.com/52088444/158246679-3f130459-2a4e-4e47-96e8-6058f367ba77.png)
 
+To create a DN, you need to configure its properties, seen in step 4 of the image below. Certain properties are required, as indicated by the red asterisk next to the property name:
+
+Para criar um DN, você precisa configurar suas propriedades, visto no passo 4 da imagem abaixo. Certas propriedades são obrigatórias, conforme indicado pelo asterisco vermelho ao lado do nome da propriedade:
+
+![image](https://user-images.githubusercontent.com/52088444/158247129-73e3435f-7a98-4d18-9aeb-10d4e8c8d1cb.png)
+
+
+- Number—Refers to the DN number. (Required)
+-  Type—Refers to the type of DN. The drop-down list contains all the DN types. (Required)
+- Switch—Refers to the switch object in which this DN is being configured. You cannot change this field, so it appears grayed-out.
+- Register—Defines whether the DN exists within the switch or not. Extensions, queues, and routing points should all be registered. This is marked True by default. (Required)
+- Association—Is an entity permanently associated with this DN. For DNs of External Routing Point type, this number may be required to substitute for the actual DN directory number and may be used when placing calls to this routing point from another Switch. See Question1/Answer1 below for more information.
+- State—Defines whether the DN is active in Genesys. The DN is active if the checkbox is selected. This checkbox is selected by default. See Question2/Answer2 below for more information.
+
+- Número — Refere-se ao número DN. (Requeridos)
+- Tipo — Refere-se ao tipo de DN. A lista suspensa contém todos os tipos de DN. (Requeridos)
+- Switch — Refere-se ao objeto switch no qual este DN está sendo configurado. Você não pode alterar este campo, então ele aparece acinzentado.
+- Register—Define se o DN existe ou não dentro do switch. Extensões, filas e pontos de roteamento devem ser registrados. Isso é marcado como Verdadeiro por padrão. (Requeridos)
+- Associação—É uma entidade permanentemente associada a este DN. Para DNs do tipo Ponto de Roteamento Externo, este número pode ser necessário para substituir o número de diretório DN real e pode ser usado ao fazer chamadas para este Ponto de Roteamento de outro Comutador. Consulte a Pergunta1/Resposta1 abaixo para obter mais informações.
+- State—Define se o DN está ativo no Genesys. O DN está ativo se a caixa de seleção estiver marcada. Esta caixa de seleção é selecionada por padrão. Consulte a Pergunta2/Resposta2 abaixo para obter mais informações.
+
+Question 1:
+
+What is the Association field on a DN used for?
+
+The Association field is used to instruct T-Server to dial a different DN to reach the DN to which the property belongs. 
+
+For example, you specify an External Routing Point 2200 that is a DN on the local switch. If you want to call this DN from another switch, you may need to dial 123. T-Server will know this if you specify 123 in the Association field of 2200. Such things can often be seen and are caused by specific switch configurations and often dependent on whether there is a direct connection between two switches or the public line is used. It is mostly used in combination with a direct connection but in fact, it is also possible on only one switch. For any reason (e.g., organizational purposes), a switch administrator might configure a DN such that you can only send a call to it if you dial a different DN.
+
+Question 2:
+
+What is the effect of setting State Enabled on or off?
+
+You can define an object and disable it if it should not be in use. This provides the ability to start setting objects up before you’re ready to use them. 
+
+For example, you could define agents before they actually begin work but not enable them. When they are on board, you can enable them. A customer interaction cannot be directed to a disabled object. Disabling an object that is a parent to other objects will cause all its child objects to be disabled. Note that a DN has a State Enabled checkbox and a Register field. You can disable a DN, but T-Server will still register it with the switch. 
+
+To configure DNs in Genesys Administrator, go to Provisioning > Switching > Switching, edit the properties of the desired switch object, and then go to the DNs tab.
+
+Questão 1:
+
+Para que é usado o campo Associação em um DN?
+
+O campo Associação é usado para instruir o T-Server a discar um DN diferente para alcançar o DN ao qual a propriedade pertence.
+
+Por exemplo, você especifica um Ponto de Roteamento Externo 2200 que é um DN no switch local. Se você quiser chamar esse DN de outro switch, talvez seja necessário discar 123. O T-Server saberá disso se você especificar 123 no campo Association de 2200. Essas coisas podem ser vistas com frequência e são causadas por configurações específicas do switch e muitas vezes dependendo se há uma conexão direta entre dois switches ou se a linha pública é usada. É usado principalmente em combinação com uma conexão direta, mas, na verdade, também é possível em apenas um switch. Por qualquer motivo (por exemplo, fins organizacionais), um administrador de switch pode configurar um DN de forma que você só possa enviar uma chamada para ele se discar um DN diferente.
+
+Questão 2:
+
+Qual é o efeito de ativar ou desativar o Estado Ativado?
+
+Você pode definir um objeto e desativá-lo se não estiver em uso. Isso fornece a capacidade de começar a configurar objetos antes que você esteja pronto para usá-los.
+
+Por exemplo, você pode definir agentes antes que eles comecem a trabalhar, mas não ativá-los. Quando eles estão a bordo, você pode habilitá-los. Uma interação do cliente não pode ser direcionada a um objeto desativado. Desabilitar um objeto que é pai de outros objetos fará com que todos os seus objetos filho sejam desabilitados. Observe que um DN tem uma caixa de seleção State Enabled e um campo Register. Você pode desabilitar um DN, mas o T-Server ainda o registrará com o switch.
+
+Para configurar DNs no Genesys Administrator, vá para Provisioning > Switching > Switching, edite as propriedades do objeto de switch desejado e vá para a guia DNs.
+
+
+## 2.8 Places and Place Groups
+
+Places
+
+For Places using GAX, go to Configuration > Switching > Places.
+
+To create a new Place, click New. When you create a new Place, you configure the General section of the Place.
+
+Para Places using GAX, vá para Configuration > Switching > Places.
+
+Para criar um novo local, clique em Novo. Ao criar um novo Local, você configura a seção Geral do Local.
+
+![image](https://user-images.githubusercontent.com/52088444/158247961-16fe7953-cab7-44e7-80da-80c9497b52b4.png)
+
+- Name—Refers to the name you decide to give to the Place. Give it a name that clearly reflects the location. For example, you might give a Place a name made up of a combination of the physical location and the DNs that are associated with it. (Required)
+
+The other properties on the General tab are optional and reference configuration objects that are not covered in this class.
+
+- Capacity Rule—Allows you the option to specify a rule determining concurrent maximums by media type for this place.
+
+- Cost Contract—Is to specify the cost contract (type of Objective Table) for use with cost-based routing to calculate the cost of an interaction being routed to this place.
+
+The DNs tab is where you associate a DN to the Place. Click Add and select the extension.
+
+- Nome—Refere-se ao nome que você decide dar ao Local. Dê-lhe um nome que reflita claramente a localização. Por exemplo, você pode dar a um Local um nome composto de uma combinação do local físico e dos DNs associados a ele. (Requeridos)
+
+As outras propriedades na guia Geral são objetos de configuração opcionais e de referência que não são abordados nesta classe.
+
+- Regra de capacidade—Permite que você especifique uma regra que determine os máximos simultâneos por tipo de mídia para este local.
+
+- Contrato de Custo—É para especificar o contrato de custo (tipo de Tabela de Objetivos) para uso com roteamento baseado em custo para calcular o custo de uma interação sendo roteada para este local.
+
+A guia DNs é onde você associa um DN ao Local. Clique em Adicionar e selecione a extensão.
+
+![image](https://user-images.githubusercontent.com/52088444/158248460-5742f715-6aba-434a-99a3-b55e010a674f.png)
+
+**Place Groups**
+
+For Places Groups using GAX, go to Configuration > Switching > Place Groups.
+
+Creating a new Place Group is very similar to creating a new Place. Click New and configure the General section of the Place Group.
+
+Para Places Groups usando GAX, vá para Configuration > Switching > Place Groups.
+
+A criação de um novo grupo de locais é muito semelhante à criação de um novo local. Clique em Novo e configure a seção Geral do Grupo de Locais.
+
+![image](https://user-images.githubusercontent.com/52088444/158248568-6f48f5a5-b4ea-4acd-95d1-e050f0cbd69a.png)
+
+Name—Refers to the name you decide to give to the Place Group. Give it a name that clearly reflects the purpose of the group and its members
+
+Nome—Refere-se ao nome que você decide dar ao Grupo de Lugares. Dê um nome que reflita claramente o propósito do grupo e seus membros
+
+The other properties on the General tab are optional and reference configuration objects are not covered in this class.
+
+-  Capacity Table—Is to specify a Capacity Table (type of Statistical Table) to use. Call-processing applications compare the values specified in the Intervals list of associated Statistical Days.
+
+- Quota Table—Is to specify the Quota Table (type of Statistical Table) to use. Call-processing applications compare the Minimum, Maximum, and Target values specified in associated Statistical Days.
+
+- Cost Contract—Is to specify the cost contract (type of Objective Table) for use with cost-based routing to calculate the cost of an interaction being routed to this place group.
+
+- Site—Is to specify which site contains the cost contract.
+
+In the Places tab, add the Places that will be associated with this Place Group. You can organize Places into Place Groups for reporting or routing purposes. For example, the image below shows the Place Group ChicagoPlaces which can report and gather the statistics on the Chicago places: 8001_Chicago and 8002_Chicago.
+
+As outras propriedades na guia Geral são opcionais e os objetos de configuração de referência não são abordados nesta classe.
+
+- Tabela de Capacidade—É para especificar uma Tabela de Capacidade (tipo de Tabela Estatística) a ser usada. Os aplicativos de processamento de chamadas comparam os valores especificados na lista Intervalos de Dias Estatísticos associados.
+
+- Tabela de Cotas—É para especificar a Tabela de Cotas (tipo de Tabela Estatística) a ser usada. Os aplicativos de processamento de chamadas comparam os valores Mínimo, Máximo e Destino especificados em Dias Estatísticos associados.
+
+- Contrato de Custo—É para especificar o contrato de custo (tipo de Tabela de Objetivos) para uso com roteamento baseado em custo para calcular o custo de uma interação sendo roteada para este grupo de locais.
+
+- Site—É para especificar qual site contém o contrato de custo.
+
+Na guia Locais, adicione os locais que serão associados a este grupo de locais. Você pode organizar Locais em Grupos de Locais para fins de geração de relatórios ou roteamento. Por exemplo, a imagem abaixo mostra o Place Group ChicagoPlaces que pode relatar e reunir as estatísticas sobre os locais de Chicago: 8001_Chicago e 8002_Chicago.
+
+![image](https://user-images.githubusercontent.com/52088444/158249121-b04f64b0-b343-47f6-822d-65b4652708da.png)
+
+##  2.9 Creating Agents
+
+Two different ways to create agents:
+
+- GAX - Configuration Manager
+- GAX - Agents View
+
+Traduzir por voz
+87 / 5.000
+Resultados de tradução
+Duas maneiras diferentes de criar agentes:
+
+- GAX - Gerenciador de configuração
+- GAX - Visualização de Agentes 
+
+
+**GAX - Configuration Manager**
+
+

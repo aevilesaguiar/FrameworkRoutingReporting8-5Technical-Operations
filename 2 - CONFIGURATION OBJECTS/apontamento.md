@@ -197,3 +197,22 @@ A seguir estão as propriedades necessárias do objeto Login do Agente que devem
 - Estado Ativado—Define se o Login do Agente está ativo ou não. No Genesys, você pode desejar que um Login de agente fique inativo se, por exemplo, um funcionário sair de férias. Você pode desativar o Login do agente desmarcando a caixa de seleção Estado ativado.
 
 Propriedades adicionais podem ser definidas quando necessário.
+
+## 2.7 DN
+
+For DNs using GAX, go to Configuration > Switching > DNs.
+
+Like Agent Logins, DNs belong to a specific switch. To create a new DN, you need to select the switch object (that belongs to the switch) and choose the DN folder. You can either edit an existing DN or create a new one by clicking New.
+
+
+ Para DNs usando GAX, vá para Configuration > Switching > DNs.
+
+Assim como os Logins de Agente, os DNs pertencem a um switch específico. Para criar um novo DN, você precisa selecionar o objeto switch (que pertence ao switch) e escolher a pasta DN. Você pode editar um DN existente ou criar um novo clicando em Novo.
+![image](https://user-images.githubusercontent.com/52088444/158246462-91dcc584-b6d4-4fc5-b315-d73bafc3745e.png)
+
+To organize the different types of directory numbers into folders, click More > New Folder, as seen in the following image. You can then create subfolders, for example, as seen here for the different types of Directory Numbers–Extensions or Routing points.
+
+Para organizar os diferentes tipos de números de diretório em pastas, clique em Mais > Nova Pasta, conforme mostrado na imagem a seguir. Você pode então criar subpastas, por exemplo, como visto aqui para os diferentes tipos de Números de Diretório – Extensões ou Pontos de Roteamento.
+
+![image](https://user-images.githubusercontent.com/52088444/158246679-3f130459-2a4e-4e47-96e8-6058f367ba77.png)
+

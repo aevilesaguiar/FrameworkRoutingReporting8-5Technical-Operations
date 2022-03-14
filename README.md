@@ -1,0 +1,2 @@
+# FrameworkRoutingReporting8-5Technical-Operations
+Description This course is intended for anyone to learn the basic functionality of Genesys Framework Routing &amp; Reporting 8.5 Technical Operations.       Note: Genesys Engage Cloud (formerly known as PureEngage Cloud) is in the process of transitioning to Genesys Multicloud CX. The change is in name only, and all of our Genesys Engage Cloud training supports Genesys Multicloud CX.

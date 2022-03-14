@@ -202,4 +202,12 @@ Every time a change is made, all client applications are supplied with dynamic u
 
 4 - Dynamic Update—Configuration Server sends changes in the configuration to relevant clients.
 
+Toda vez que uma mudança é feita, todos os aplicativos cliente são fornecidos com atualizações dinâmicas relevantes para as funções que executam, como pode ser visto na imagem acima:
 
+1 - Gravação—Uma solicitação para atualizar os dados de configuração (um processo de gravação) é enviada de um aplicativo Genesys GUI ou aplicativo de servidor.
+
+2 - Gravação—O Servidor de Configuração envia uma mensagem ao DBMS solicitando que atualizações sejam feitas no Banco de Dados de Configuração.
+
+3 - Dados de configuração—O SGBD comunica o sucesso das instruções, juntamente com uma atualização dos dados de configuração.
+
+4 - Atualização Dinâmica—O Servidor de Configuração envia alterações na configuração para clientes relevantes.

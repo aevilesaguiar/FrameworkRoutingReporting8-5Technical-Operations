@@ -15,3 +15,32 @@ Genesys Framework Routing & Reporting 8.5 Technical Operations destina-se a qual
 gerenciamento de TI da Genesys.
 
 
+
+# After completing this course, you will be able to do the following: (Após concluir este curso, você será capaz de fazer o seguinte:)
+
+## Describe the architecture and components of the Genesys Platform:
+
+- Genesys Framework
+- Genesys Routing
+- Genesys Solution Reporting
+
+## Configure objects for the Genesys environment:
+
+- Use GAX to configure and manipulate required objects
+- Setup security through Roles and Permissions
+
+## Describe Genesys Logging:
+
+- Configure logging and describe basic messaging flow
+- Configure and test alarms
+
+## Configure Routing:
+
+- Import and set up a Composer Routing Application
+
+## Generate reports: 
+
+- Creating dashboards
+- Applying widgets
+
+

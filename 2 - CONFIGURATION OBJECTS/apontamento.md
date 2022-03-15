@@ -527,3 +527,169 @@ The import process can create new objects as well as build relationships between
 Isso fornece a capacidade de importar um arquivo que pode ser usado para criar e modificar vários objetos de configuração.
 
 O processo de importação pode criar novos objetos, bem como construir relacionamentos entre objetos. Por exemplo, durante a criação de um conjunto de agentes, os agentes podem receber Habilidades, colocados em Grupos de Agentes e ter seu Grupo de Acesso definido. Em geral, ao usar o processo de importação ou exportação para construir relacionamentos, os objetos referenciados devem ser criados antecipadamente.
+
+## 2.10 GAX: Import/Export Agents
+
+In the Framework Routing & Reporting 8.5 Foundation class, you learned how to assign skills and Groups using the Agents View in GAX.
+
+Na classe Framework Routing & Reporting 8.5 Foundation, você aprendeu como atribuir habilidades e grupos usando a Visualização de Agentes no GAX.
+
+GAX also gives you the ability to create more than one agent at a time. The Import/Export functionality is found in two places under GAX > Agents view. 
+
+O GAX também oferece a capacidade de criar mais de um agente por vez. A funcionalidade Importar/Exportar é encontrada em dois locais na visualização GAX > Agentes.
+
+![image](https://user-images.githubusercontent.com/52088444/158382326-ca5a7af8-8d5d-4954-a9ad-20d6bcd59d99.png)
+
+It can also be found under GAX > Configuration > Accounts > Persons > More menu.
+Também pode ser encontrado no menu GAX > Configuração > Contas > Pessoas > Mais.
+
+![image](https://user-images.githubusercontent.com/52088444/158382442-155d9e10-2d53-412e-ae4f-dd4bd63fef5d.png)
+
+ There are several options for creating multiple agents:
+- import–Instead of adding an individual agent, you can import multiple agents from a .csv file (comma-separated file).
+- Export–Another similar option is to select one or more agents to export to a .csv file. This generates a file with the correct headers, but also includes the data of the selected agents for reference. You can modify the data of the existing agents as well as change them into data for new agents.
+
+Existem várias opções para criar vários agentes:
+- import–Em vez de adicionar um agente individual, você pode importar vários agentes de um arquivo .csv (arquivo separado por vírgula).
+- Exportar – Outra opção semelhante é selecionar um ou mais agentes para exportar para um arquivo .csv. Isso gera um arquivo com os cabeçalhos corretos, mas também inclui os dados dos agentes selecionados para referência. Você pode modificar os dados dos agentes existentes, bem como transformá-los em dados para novos agentes.
+
+##  2.11 Exporting an Agent: Setup
+
+Before you decide to import multiple agents, it is good practice to have a ready-made template containing all the important fields to be imported. To do this, you will need to export the best agent to become your main template for future imports.
+
+Antes de decidir importar vários agentes, é uma boa prática ter um modelo pronto contendo todos os campos importantes a serem importados. Para isso, você precisará exportar o melhor agente para se tornar seu template principal para futuras importações.
+
+![image](https://user-images.githubusercontent.com/52088444/158382787-b5a2c130-f6be-447e-b1df-7834e6a7f5bf.png)
+
+Note: Make sure you select the agent who is assigned to one or more Agent Groups and Skills.
+
+Nota: Certifique-se de selecionar o agente atribuído a um ou mais Grupos e habilidades de agentes.
+
+During the agent data export to a .csv file, you are presented with the screen shown in the image below to select the agent data you wish to export.
+
+Durante a exportação dos dados do agente para um arquivo .csv, você verá a tela mostrada na imagem abaixo para selecionar os dados do agente que deseja exportar.
+
+![image](https://user-images.githubusercontent.com/52088444/158382943-c3ffd7e2-6b17-4c15-8b20-137a3ccaea4a.png)
+
+There are optional fields and columns you may select for exporting. Select the box next to the optional data you wish to export. You will see a summary of the fields and columns that you have selected. There are mandatory data that is always exported, such as First Name, Last Name, Employee ID, etc. This data appears at the top of the list and does not need to be selected. The optional data that you have selected appears at the bottom of the summary list.
+
+Existem campos e colunas opcionais que você pode selecionar para exportação. Selecione a caixa ao lado dos dados opcionais que deseja exportar. Você verá um resumo dos campos e colunas que você selecionou. Existem dados obrigatórios que são sempre exportados, como Nome, Sobrenome, ID do Funcionário, etc. Esses dados aparecem no topo da lista e não precisam ser selecionados. Os dados opcionais que você selecionou aparecem na parte inferior da lista de resumo.
+
+![image](https://user-images.githubusercontent.com/52088444/158383063-c9a9e46e-ccda-4b98-9cb5-993785aa73da.png)
+
+##  2.12 Sample Exported File(Arquivo Exportado de Amostra)
+
+The following image is an example of the exported agent data .csv file. You can view the export as a text file and as an Excel spreadsheet. These options allow you to view and use the data to build a new .csv file for importing back into GAX.
+
+A imagem a seguir é um exemplo do arquivo .csv de dados do agente exportado. Você pode visualizar a exportação como um arquivo de texto e como uma planilha do Excel. Essas opções permitem que você visualize e use os dados para criar um novo arquivo .csv para importar de volta para o GAX.
+
+![image](https://user-images.githubusercontent.com/52088444/158383225-d046fef7-533e-46b7-a1b2-02b128cb9820.png)
+
+This sample file contains the column headings, such as First Name, Last Name, and Username. Notice that the agent is a member of the Agent Group: Bankers. This exported .csv file is an excellent starting point for building a new .csv file for importing multiple agents into GAX. You can modify existing agent data or copy and paste the existing agent data and update the needed fields for the new agents.
+
+Este arquivo de exemplo contém os títulos das colunas, como Nome, Sobrenome e Nome de usuário. Observe que o agente é membro do Grupo de Agentes: Banqueiros. Este arquivo .csv exportado é um excelente ponto de partida para criar um novo arquivo .csv para importar vários agentes para o GAX. Você pode modificar os dados do agente existente ou copiar e colar os dados do agente existente e atualizar os campos necessários para os novos agentes.
+
+## 2.13 Building the Import File(Construindo o arquivo de importação)
+
+Use the exported .csv file as a template to build a .csv file for importing agents back into GAX. The following gives an explanation of the column headings in the .csv file and presents guidelines for creating and modifying agent data for import:
+
+- Action—This field has a value of either ADD or UPDATE. ADD will add a new agent. UPDATE will modify an existing agent in the Configuration Layer when the file is imported.
+- FirstName and LastName—The user’s first and last name.
+- Employee ID—Must be unique in the Genesys environment.
+- Username—Must be unique in the Genesys environment.
+- IsAgent—Determines whether the user will have agent related information, such as belonging to Agent Groups.
+- Folder—Used if you have specified sub-folders for organizing persons. You can specify the name of the folder here. If left blank, it means it is at the top level and it is the person’s folder.
+- Agent Group, Access Group, and Switch—Columns indicated with a Y, N, or blank. Using Y means the agent will be added, N means the agent will be removed, and blank means no action occurs.
+- Password—The agent's password.
+
+Use o arquivo .csv exportado como modelo para criar um arquivo .csv para importar agentes de volta ao GAX. Veja a seguir uma explicação dos títulos das colunas no arquivo .csv e apresenta diretrizes para criar e modificar dados do agente para importação:
+
+- Ação — Este campo tem um valor de ADD ou UPDATE. ADD adicionará um novo agente. UPDATE modificará um agente existente na Camada de Configuração quando o arquivo for importado.
+- FirstName e LastName—O nome e sobrenome do usuário.
+- Employee ID—Deve ser exclusivo no ambiente Genesys.
+- Nome de usuário—Deve ser exclusivo no ambiente Genesys.
+- IsAgent—Determina se o usuário terá informações relacionadas ao agente, como pertencer a grupos de agentes.
+- Pasta—Usada se você tiver especificado subpastas para organizar pessoas. Você pode especificar o nome da pasta aqui. Se deixado em branco, significa que está no nível superior e é a pasta da pessoa.
+- Grupo de Agentes, Grupo de Acesso e Comutador—Colunas indicadas com S, N ou em branco. Usar Y significa que o agente será adicionado, N significa que o agente será removido e em branco significa que nenhuma ação ocorre.
+- Senha—A senha do agente.
+
+If your agents are to be assigned to multiple Agent Groups and Skills you can add extra columns to the templates.
+
+Se seus agentes devem ser atribuídos a vários Grupos de Agentes e Habilidades, você pode adicionar colunas extras aos modelos.
+
+![image](https://user-images.githubusercontent.com/52088444/158384091-39c86caf-dede-433a-9e4f-a4528e154035.png)
+
+Note: Agents must be assigned to unique Agent logins. You are required to create additional columns and rename them.
+
+Nota:Os agentes devem ser atribuídos a logins de agente exclusivos. Você deve criar colunas adicionais e renomeá-las.
+
+## 2.14 Import
+
+When the file is ready to be imported, go to GAX > Agents view to use the Import option. Click the Choose file button and select the .csv file that you have just created. All of the agent information is imported into the Configuration Layer. Even though a lot of agent information is added using the .csv file import, you may need to edit the agents after importing to specify additional properties not included in the .csv file.
+
+Quando o arquivo estiver pronto para ser importado, vá para GAX > visualização Agentes para usar a opção Importar. Clique no botão Escolher arquivo e selecione o arquivo .csv que você acabou de criar. Todas as informações do agente são importadas para a camada de configuração. Embora muitas informações do agente sejam adicionadas usando a importação do arquivo .csv, pode ser necessário editar os agentes após a importação para especificar propriedades adicionais não incluídas no arquivo .csv.
+
+![image](https://user-images.githubusercontent.com/52088444/158384350-ca560724-8bbe-435c-9497-c04eaea03ca2.png)
+
+![image](https://user-images.githubusercontent.com/52088444/158384394-23fa1fc5-62eb-4a7f-bf1f-2c71eaf737a1.png)
+
+## 2.15 Building Switching and Exporting /Importing in Action(Construindo Switching e Exportando/Importando em Ação)
+
+Lets now apply an example of switching configuration and exporting/importing agents.
+
+Scenario 1 - Expanding Number of Seats
+
+The Beyond contact center company is now expanding its growth due to the increased volume of business and lack of resources to handle them. They have decided to have more seats located on their floor and have plans to hire more agents. The system admin will now need to configure the additional number of places and Agent logins in GAX for the Genesys platform Routing and Reporting.
+
+Scenario 2 - Hiring New Agents
+
+The contact center manager decides to hire up to three agents. These agents will be dedicated to a specific sales Group and have dedicated skills assigned based on their experience and knowledge. The system admin will create and add resource objects using the export and import functionality as there are large numbers to configure and assign.
+
+
+Vamos agora aplicar um exemplo de configuração de comutação e agentes de exportação/importação.
+
+Cenário 1 - Expansão do número de assentos
+
+A empresa de contact center Beyond está agora expandindo seu crescimento devido ao aumento do volume de negócios e falta de recursos para lidar com eles. Eles decidiram ter mais assentos localizados em seu andar e planejam contratar mais agentes. O administrador do sistema agora precisará configurar o número adicional de locais e logins de agentes no GAX para a plataforma Genesys Routing and Reporting.
+
+Cenário 2 - Contratação de novos agentes
+
+O gerente do contact center decide contratar até três agentes. Esses agentes serão dedicados a um grupo de vendas específico e terão habilidades dedicadas atribuídas com base em sua experiência e conhecimento. O administrador do sistema criará e adicionará objetos de recurso usando a funcionalidade de exportação e importação, pois há grandes números para configurar e atribuir.
+
+## 2.16 Learning Summary
+
+Now that you have completed this chapter, you should be able to do the following: 
+
+1 - Understand Configuration Order and Dependencies.
+
+2 - Describe and create switch-related objects.
+
+    - Agent Logins
+    - Directory Numbers (DNs)
+    - Places
+    - Place Groups
+3 - Import and export agents.
+
+4 - Describe and create Agent objects.
+
+    - Using Configuration Manager Menu 
+    - Using Agents Menu
+
+    Agora que você concluiu este capítulo, você deve ser capaz de fazer o seguinte:
+
+1 - Compreender a Ordem de Configuração e Dependências.
+
+2 - Descrever e criar objetos relacionados a switch.
+
+     - Logins de agentes
+     - Números de diretório (DNs)
+     - Lugares
+     - Grupos de lugares
+3 - Agentes de importação e exportação.
+
+4 - Descrever e criar objetos Agente.
+
+     - Usando o menu do gerenciador de configuração
+     - Usando o menu de agentes
+
+     

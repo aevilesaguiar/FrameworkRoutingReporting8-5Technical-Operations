@@ -368,3 +368,154 @@ Exemplo:
 Suponha que você recebeu uma função que concede a você o privilégio de acessar a visualização de agentes no GAX. Nenhuma outra função foi atribuída a você. Ao fazer login, apenas a seção Visualização de agentes é exibida no cabeçalho GAX. Todas as outras seções estão ocultas.
 
 ## 3.15 GAX: Create a New Role
+
+To add a new role, go to GAX > Configuration > Accounts > Roles and give the new role a name. Using the Role Template Selection, select a role template to prepopulate the set of privileges for this new role—you can start with no privileges (None) or all privileges (Super User).
+
+Para adicionar uma nova função, vá para GAX > Configuration > Accounts > Roles e dê um nome à nova função. Usando a Seleção de modelo de função, selecione um modelo de função para preencher previamente o conjunto de privilégios para essa nova função — você pode começar sem privilégios (Nenhum) ou com todos os privilégios (Superusuário).
+
+
+![image](https://user-images.githubusercontent.com/52088444/158628362-3f29fdbb-0b4f-4b19-a80a-597cd074cb58.png)
+
+Within the properties of the role, there is a Role Members tab. This allows you to assign Access Groups and Persons to the role you just created. Anyone who is added to the Access Group will inherit the privileges of this role.
+
+Dentro das propriedades da função, há uma guia Membros da função. Isso permite que você atribua grupos de acesso e pessoas à função que você acabou de criar. Qualquer pessoa adicionada ao Grupo de Acesso herdará os privilégios dessa função.
+
+![image](https://user-images.githubusercontent.com/52088444/158628781-0fc29a89-e32d-4767-90a2-a4c6f9c55280.png)
+
+Assigning privileges to the members of the role is the next step. You can select or unselect privileges using the checkbox seen in the image below. The privileges are organized in a hierarchy. The top level of the hierarchy indicates the application.
+
+A atribuição de privilégios aos membros da função é a próxima etapa. Você pode selecionar ou desmarcar privilégios usando a caixa de seleção vista na imagem abaixo. Os privilégios são organizados em uma hierarquia. O nível superior da hierarquia indica o aplicativo.
+
+Example:
+
+CfgGenesysAdministratorServer is for GAX. Module Codes appear next in the hierarchy to indicate to which parts of the application you are giving privileges. If the box is unchecked in the upper part of the hierarchy, it indicates that all items underneath are not checked.
+
+Exemplo:
+
+CfgGenesysAdministratorServer é para GAX. Os Códigos de Módulo aparecem a seguir na hierarquia para indicar a quais partes do aplicativo você está concedendo privilégios. Se a caixa estiver desmarcada na parte superior da hierarquia, isso indica que todos os itens abaixo não estão marcados.
+
+![image](https://user-images.githubusercontent.com/52088444/158629346-0fefd420-8fad-4b48-9dab-c03c2db7a477.png)
+
+Examples of GAX Modules Codes:
+
+- OPM = Operational Parameter Management
+- AMUI = Agent Management User Interface
+- ARM = Audio Resource Management
+- ASD = Automated Service Deployment
+- BULKOPS = Bulk Operations
+- COM = Configuration Object Management
+- GA = Genesys Administrator
+- gax-lrm = LRM Plug-in
+- UMUI = User Management User Interface
+
+Together, these modules collect associated privileges in the hierarchy.
+
+Exemplos de Códigos de Módulos GAX:
+
+- OPM = Gerenciamento de Parâmetros Operacionais
+- AMUI = Interface de usuário de gerenciamento de agentes
+- ARM = Gerenciamento de recursos de áudio
+- ASD = Implantação de serviço automatizada
+- BULKOPS = Operações em Massa
+- COM = Gerenciamento de Objetos de Configuração
+- GA = Administrador Genesys
+- gax-lrm = Plug-in LRM
+- UMUI = Interface de usuário de gerenciamento de usuários
+
+Juntos, esses módulos coletam privilégios associados na hierarquia.
+
+
+On the right-hand side of the screen, the prerequisite privileges are indicated. In order to give the privileges, you have to ensure that the required prerequisite privileges have been assigned. In the example shown above, to assign the Modify Agents in Agent Management privilege, you must make sure that the AGENT_MGMT_READ_AGENTS (read) privilege has been assigned first.
+
+No lado direito da tela, os privilégios de pré-requisito são indicados. Para conceder os privilégios, você deve garantir que os privilégios de pré-requisito necessários tenham sido atribuídos. No exemplo mostrado acima, para atribuir o privilégio Modificar Agentes no Gerenciamento de Agentes, você deve certificar-se de que o privilégio AGENT_MGMT_READ_AGENTS (leitura) tenha sido atribuído primeiro.
+
+**Multiple Roles**
+
+You can assign more than one Role to a User or Access Group, sometimes resulting in privileges being granted differently between Roles. In this case, the User or Access Group will have the combined set of privileges granted by each Role. In other words, the User or Access Group is granted any privilege which is granted by at least one of the assigned Roles.
+
+Privileges are detailed in the Genesys Documentation. For example, the GAX privileges are covered in Genesys Administrator Extension Deployment Guide.
+
+Você pode atribuir mais de uma função a um usuário ou grupo de acesso, às vezes resultando em privilégios concedidos de forma diferente entre funções. Nesse caso, o Usuário ou Grupo de Acesso terá o conjunto combinado de privilégios concedidos por cada Função. Em outras palavras, o usuário ou grupo de acesso recebe qualquer privilégio concedido por pelo menos uma das funções atribuídas.
+
+Os privilégios são detalhados na Documentação da Genesys. Por exemplo, os privilégios GAX são abordados no Genesys Administrator Extension Deployment Guide.
+
+## 3.16 Roles in Action
+
+Scenario 2 - Agent Supervisor for GAX
+
+As HBalzac is promoted, he now requires access to the GAX application and needs permissions to view and assign skills to his allocated team. The System admin will need to create a new role and set up the required privileges.
+
+
+## 3.17 Access Control Plan
+
+The default security settings are designed to meet the most common needs of enterprises that implement Genesys Framework. For businesses in this category, the security implementation is as easy as creating new user accounts and assigning them to the default Access Groups (Super Administrator and Administrator).
+
+As configurações de segurança padrão são projetadas para atender às necessidades mais comuns das empresas que implementam o Genesys Framework. Para empresas nesta categoria, a implementação de segurança é tão fácil quanto criar novas contas de usuário e atribuí-las aos Grupos de Acesso padrão (Super Administrador e Administrador).
+
+![image](https://user-images.githubusercontent.com/52088444/158630864-d0fb3b06-90a3-4c7b-abab-d1a66bc9cffe.png)
+
+Complex Systems
+
+For environments with a very large number of configuration objects, a more complex security plan may be required. If you have many administrators, each one assigned to different tasks in the Genesys environment, then you may need to customize the security implementation.
+
+Sistemas Complexos
+
+Para ambientes com um número muito grande de objetos de configuração, pode ser necessário um plano de segurança mais complexo. Se você tiver muitos administradores, cada um atribuído a tarefas diferentes no ambiente Genesys, talvez seja necessário personalizar a implementação de segurança.
+
+
+Creating New Subfolders 
+
+You may need to sub-divide the configuration objects in your Genesys Administrator by using subfolders. For example, the Users objects that identify the agents assigned to a particular manager can be placed in a subfolder located in the Persons folder. Access Rights can then be set at the subfolder level.
+
+Criando novas subpastas
+
+Você pode precisar subdividir os objetos de configuração em seu Genesys Administrator usando subpastas. Por exemplo, os objetos Usuários que identificam os agentes atribuídos a um determinado gerente podem ser colocados em uma subpasta localizada na pasta Pessoas. Os Direitos de Acesso podem ser definidos no nível da subpasta.
+
+European Data Protection Directive 
+
+The Genesys suite of products is designed to make up part of a fully functioning contact center solution, which may include certain non-Genesys components and customer systems. Genesys products are intended to provide customers with reasonable flexibility in designing their own contact center solutions. As such, it is possible for a customer to use the Genesys suite of products in a manner that complies with the European Data Protection Directive (EDPD). Of course, the Genesys products are tools to be used by the customer and by themselves do not ensure or enforce compliance with the EDPD. Genesys recommends that customers take steps to ensure compliance with the EDPD as well as any other applicable local security requirements. Many features of the Management Framework are designed to assist in this effort. Previously, in the lesson on Logging, we saw how the Management Framework’s logging subsystem enables selective filtering of sensitive data in logs on a per-application basis.
+
+Diretiva Europeia de Proteção de Dados
+
+O conjunto de produtos da Genesys foi projetado para fazer parte de uma solução de contact center totalmente funcional, que pode incluir determinados componentes e sistemas de clientes não pertencentes à Genesys. Os produtos Genesys destinam-se a fornecer aos clientes uma flexibilidade razoável na concepção de suas próprias soluções de contact center. Como tal, é possível que um cliente use o conjunto de produtos Genesys em conformidade com a Diretiva Europeia de Proteção de Dados (EDPD). É claro que os produtos Genesys são ferramentas a serem utilizadas pelo cliente e por si só não garantem ou impõem a conformidade com o EDPD. A Genesys recomenda que os clientes tomem medidas para garantir a conformidade com o EDPD, bem como com quaisquer outros requisitos de segurança locais aplicáveis. Muitos recursos do Management Framework são projetados para auxiliar nesse esforço. Anteriormente, na lição sobre Logging, vimos como o subsistema de log do Management Framework permite a filtragem seletiva de dados confidenciais em logs por aplicativo.
+
+
+3.18 Learning Summary
+
+Now that you have completed this chapter, you should be able to do the following: 
+
+1 - Recall Permissions and Roles.
+
+2 - Create a new Access Group.
+
+3 - Assign Permissions.
+
+4 - Describe Permissions.
+
+5 - Describe Configuration Units.
+
+6 - Create a new Role.
+
+7 - Assign Privileges to a Role.
+
+8 - Assign Access Group and Role to a User.
+
+3.18 Resumo de Aprendizagem
+
+Agora que você concluiu este capítulo, você deve ser capaz de fazer o seguinte:
+
+1 - Recuperar Permissões e Funções.
+
+2 - Crie um novo Grupo de Acesso.
+
+3 - Atribuir Permissões.
+
+4 - Descreva as Permissões.
+
+5 - Descreva as Unidades de Configuração.
+
+6 - Crie uma nova Função.
+
+7 - Atribuir privilégios a uma função.
+
+8 - Atribuir Grupo de Acesso e Função a um Usuário.

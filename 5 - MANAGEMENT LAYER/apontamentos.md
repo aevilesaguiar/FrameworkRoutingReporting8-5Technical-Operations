@@ -105,3 +105,343 @@ O Local Control Agent está localizado em cada host da camada de gerenciamento e
 
 ![image](https://user-images.githubusercontent.com/52088444/158645491-53e66411-b38b-4375-beb6-62f770cd5826.png)
 
+## 5.4 Management Layer Startup
+
+The Management Layer is started automatically using Services, or manually from a command line, an application shortcut, or a script. The DBMS that hosts the Log Database should be running before starting Management Layer applications. 
+
+The procedure for starting the Management Layer is as follows: 
+
+A camada de gerenciamento é iniciada automaticamente usando Serviços ou manualmente a partir de uma linha de comando, um atalho de aplicativo ou um script. O DBMS que hospeda o banco de dados de log deve estar em execução antes de iniciar os aplicativos da camada de gerenciamento.
+
+O procedimento para iniciar a camada de gerenciamento é o seguinte:
+
+Step 1- LCA
+
+LCA is started first. LCA monitors processes on its server host and registers Genesys server applications as they start. LCA does not require a connection to the Configuration Layer. There is one LCA on every computer that hosts one or more Genesys servers.
+
+Etapa 1- ACV
+
+O LCA é iniciado primeiro. A LCA monitora os processos em seu host de servidor e registra os aplicativos do servidor Genesys à medida que são iniciados. O LCA não requer uma conexão com a Camada de Configuração. Há um LCA em cada computador que hospeda um ou mais servidores Genesys.
+
+![image](https://user-images.githubusercontent.com/52088444/158658893-e62cae22-6ba5-467e-843d-ca7b0e5f7a1c.png)
+
+
+Step 2 - Message Server
+
+Next the Message Server is started. Message Server connects to the Configuration Server to retrieve the configuration data. Message Server then connects to the Log Database.
+
+
+Etapa 2 - Servidor de mensagens
+
+Em seguida, o Message Server é iniciado. O Message Server se conecta ao Configuration Server para recuperar os dados de configuração. O Message Server então se conecta ao banco de dados de log.
+
+![image](https://user-images.githubusercontent.com/52088444/158659078-90dfac36-318d-46b9-8fa2-6ea0e117629b.png)
+
+Step 3 - SCS
+
+SCS is next. SCS connects first to the Configuration Server to obtain its own configuration data. In addition, SCS obtains data about every configured alarm condition, application, solution, and host in the system in order to perform management functions. Next, SCS then connects to Message Server. SCS then connects to all Local Control Agents that are part of the system and, as a result, receives the current status of hosts and applications.
+
+Etapa 3 - SCS
+
+SCS é o próximo. O SCS se conecta primeiro ao Servidor de Configuração para obter seus próprios dados de configuração. Além disso, o SCS obtém dados sobre cada condição de alarme, aplicativo, solução e host configurados no sistema para executar funções de gerenciamento. Em seguida, o SCS se conecta ao Message Server. O SCS então se conecta a todos os Agentes de Controle Local que fazem parte do sistema e, como resultado, recebe o status atual dos hosts e aplicativos.
+
+![image](https://user-images.githubusercontent.com/52088444/158659318-fa474f28-bbb3-4564-a257-c6f7758049b0.png)
+
+
+## 5.5 Control, Status, Logging, and Alarms
+
+This section describes the Management Layer capabilities that help you optimally manage the Genesys software serving your contact center as follows:
+
+- Solution & application Control
+- Logging Functions
+- Alarm Processing
+- Fault Management Functions
+
+The following diagrams outline the process of how control, status, logging, and alarms work together in the Management Layer. The example uses Host B, shown below. The T-Server on Host B is one example of a server application connecting to the LCA on its own host.
+
+Esta seção descreve os recursos da camada de gerenciamento que ajudam você a gerenciar de maneira otimizada o software Genesys que atende ao seu contact center da seguinte forma:
+
+- Controle de soluções e aplicativos
+- Funções de registro
+- Processamento de Alarmes
+- Funções de gerenciamento de falhas
+
+Os diagramas a seguir descrevem o processo de como controle, status, registro e alarmes funcionam juntos na camada de gerenciamento. O exemplo usa o Host B, mostrado abaixo. O T-Server no Host B é um exemplo de um aplicativo de servidor que se conecta ao LCA em seu próprio host.
+
+**Solution and Application Control**
+
+Each Genesys server application exists in the Configuration Database where it is assigned to a host. LCA runs on each of these hosts, enabling the Management Layer to monitor and control the Genesys applications. Administrators, using SCS, can start and stop individual applications and entire solutions on all hosts.
+
+Example:
+
+The T-Server application is started from the User Interface GAX or GA on Host B. The instruction to start that T-Server goes to Solution Control Server and is sent to the Local Control Agent on Host B. The Local Control Agent starts the T-Server on Host B. 
+
+Controle de soluções e aplicativos
+
+Cada aplicativo do servidor Genesys existe no banco de dados de configuração onde é atribuído a um host. O LCA é executado em cada um desses hosts, permitindo que a camada de gerenciamento monitore e controle os aplicativos Genesys. Os administradores, usando o SCS, podem iniciar e interromper aplicativos individuais e soluções inteiras em todos os hosts.
+
+Exemplo:
+
+O aplicativo T-Server é iniciado a partir da Interface do Usuário GAX ou GA no Host B. A instrução para iniciar esse T-Server vai para o Solution Control Server e é enviada para o Local Control Agent no Host B. O Local Control Agent inicia o T-Server -Servidor no Host B.
+
+![image](https://user-images.githubusercontent.com/52088444/158661831-dea723f6-3ebe-451c-98de-36600fc95967.png)
+
+
+**Status**
+
+LCA keeps track of the state of each application on its host. LCA also knows the desired state of the application based on SCS control commands as well as application configuration options.
+
+Example:
+
+Once T-Server is started, the status is reported back through the Local Control Agent. LCA provides the status of the T-Server to the Solution Control Server and it is displayed as started in the User Interface (GAX or GA).
+
+O LCA acompanha o estado de cada aplicativo em seu host. O LCA também conhece o estado desejado do aplicativo com base nos comandos de controle do SCS, bem como nas opções de configuração do aplicativo.
+
+Exemplo:
+
+Uma vez que o T-Server é iniciado, o status é reportado através do Local Control Agent. O LCA fornece o status do T-Server para o Solution Control Server e é exibido como iniciado na Interface do usuário (GAX ou GA).
+
+![image](https://user-images.githubusercontent.com/52088444/158808513-86ce91c1-b200-4c55-828f-121a0a490c04.png)
+
+**Logging**
+
+The Management Layer enables centralized logging. Log messaging is a key source of information for troubleshooting Genesys solutions. 
+
+The Management Layer stores log messages in a centralized log database. Administrators then have instant access to the information via GAX and GA. 
+
+Many log messages are standard across Genesys server applications, with associated codes for easy identification. In addition, each Genesys application may have its own unique set of messages. 
+
+The log record format is standardized across applications to enable automated log event processing and database storage. The level of detail and the destination of the log output are controlled using application options.
+
+Example:
+
+If the T-Server is set up to send Log Messages to the network, it sends messages to the Message Server and Log Database. The administrator has instant access to information using GAX and GA. The centralized log shows T-Server has started.
+
+O Management Layer (camada de gerenciamento) permite o registro centralizado. As mensagens de log são uma fonte importante de informações para solucionar problemas de soluções da Genesys.
+
+O Management Layer (camada de gerenciamento) armazena mensagens de log em um banco de dados de log centralizado. Os administradores têm acesso instantâneo às informações via GAX e GA.
+
+Muitas mensagens de log são padrão nos aplicativos de servidor Genesys, com códigos associados para facilitar a identificação. Além disso, cada aplicativo Genesys pode ter seu próprio conjunto exclusivo de mensagens.
+
+O formato de registro de log é padronizado em todos os aplicativos para permitir o processamento automatizado de eventos de log e armazenamento de banco de dados. O nível de detalhe e o destino da saída do log são controlados usando as opções do aplicativo.
+
+Exemplo:
+
+Se o T-Server estiver configurado para enviar mensagens de log para a rede, ele enviará mensagens para o servidor de mensagens e banco de dados de log. O administrador tem acesso instantâneo às informações usando GAX e GA. O log centralizado mostra que o T-Server foi iniciado.
+
+**Alarm Processing**
+
+Even if they aren’t sending log events to the central log database, Genesys server applications still require a connection to the Message Server in order to enable alarm processing capabilities. 
+
+Alarm conditions are virtual red flags that are raised when specific log events occur. For example, an alarm can be triggered when an application stops responding. Alarms are displayed in GAX and GA. 
+
+Each alarm can be associated with an automatic reaction (e.g., send an email/page, restart an application, send an SNMP trap). 
+
+Alarm conditions can be configured against any standard-level or trace-level log event defined in the system. These events have to be sent to the network in order to trigger alarms. Wizards are available to assist in configuring alarms and reactions. Alarms stay in the system until canceled by other specified events or cleared.
+
+Example:
+
+If an alarm notification is associated with the log message that occurred, Solution Control Server receives notification from the Message Server, the alarm displays in the User Interface (GAX or GA), and any configured reactions occur. 
+
+Mesmo que não estejam enviando eventos de log para o banco de dados de log central, os aplicativos do servidor Genesys ainda exigem uma conexão com o Message Server para habilitar os recursos de processamento de alarme.
+
+As condições de alarme são sinalizadores vermelhos virtuais que são acionados quando ocorrem eventos de log específicos. Por exemplo, um alarme pode ser acionado quando um aplicativo para de responder. Os alarmes são exibidos em GAX e GA.
+
+Cada alarme pode ser associado a uma reação automática (por exemplo, enviar um e-mail/página, reiniciar um aplicativo, enviar uma interceptação SNMP).
+
+As condições de alarme podem ser configuradas em relação a qualquer evento de log de nível padrão ou de rastreamento definido no sistema. Esses eventos devem ser enviados à rede para acionar os alarmes. Assistentes estão disponíveis para auxiliar na configuração de alarmes e reações. Os alarmes permanecem no sistema até serem cancelados por outros eventos especificados ou eliminados.
+
+Exemplo:
+
+Se uma notificação de alarme estiver associada à mensagem de log que ocorreu, o Solution Control Server recebe a notificação do Message Server, o alarme é exibido na Interface do usuário (GAX ou GA) e ocorrem quaisquer reações configuradas.
+
+![image](https://user-images.githubusercontent.com/52088444/158809314-c2f8a245-4ce7-4cda-aa03-530733ff5716.png)
+
+## 5.6 SCS
+
+In the previous example, there was one Solution Control Server, but Solution Control Server can be used in distributed mode (multiple Solution Control Servers referred to as Distributed Solution Control Server) to distribute management-related tasks among the sites in a geographically dispersed enterprise. In this scenario, each SCS is responsible for a set of one or more hosts, and is associated with monitoring and communicating with the Local Control Agents on those hosts.
+
+Distributed Solution Control Servers communicate with each other through a dedicated Message Server. When using Distributed SCS, you must explicitly configure its ownership of Hosts, Applications, and Solutions. That is to say, you associate each Host, Application, and Solution object with a particular SCS. 
+
+In the diagram below, there is one main SCS, with which the other Solution Control Servers communicate. The main SCS is responsible for Site A. It is responsible for monitoring the LCA on Host A1 and the LCA Host A2. Site B which could be located geographically anywhere in the world, has its own Solution Control Server, SCS 2. It is responsible for monitoring the LCA on Host B1 and the LCA Host B2. Looking at the environment through GAX, you need to know the overall status of both Site A and B. All status information needs to come together through the one main SCS. This occurs when all messages pass through one message server.
+
+No exemplo anterior, havia um Solution Control Server, mas o Solution Control Server pode ser usado no modo distribuído (vários Solution Control Servers chamados de Distributed Solution Control Server) para distribuir tarefas relacionadas ao gerenciamento entre os sites em uma empresa geograficamente dispersa. Nesse cenário, cada SCS é responsável por um conjunto de um ou mais hosts e está associado ao monitoramento e à comunicação com os Local Control Agents nesses hosts.
+
+Os Servidores de Controle de Soluções Distribuídas se comunicam entre si por meio de um Servidor de Mensagens dedicado. Ao usar o Distributed SCS, você deve configurar explicitamente sua propriedade de hosts, aplicativos e soluções. Ou seja, você associa cada objeto Host, Aplicativo e Solução a um SCS específico.
+
+No diagrama abaixo, há um SCS principal, com o qual os outros Solution Control Servers se comunicam. O SCS principal é responsável pelo Site A. Ele é responsável por monitorar o LCA no Host A1 e o LCA Host A2. O Site B que poderia estar localizado geograficamente em qualquer lugar do mundo, possui seu próprio Solution Control Server, SCS 2. Ele é responsável por monitorar o LCA no Host B1 e o Host LCA B2. Observando o ambiente por meio do GAX, você precisa conhecer o status geral dos Sites A e B. Todas as informações de status precisam ser reunidas por meio de um SCS principal. Isso ocorre quando todas as mensagens passam por um servidor de mensagens.
+
+Note: This is not the same Message Server that is used for logging. It is the same type of application, but is another installation with different options. This Message Server sits between the main SCS and other distributed SCS to collects messages.
+
+Observação: este não é o mesmo servidor de mensagens usado para log. É o mesmo tipo de aplicativo, mas é outra instalação com opções diferentes. Este Message Server fica entre o SCS principal e outro SCS distribuído para coletar mensagens.
+
+![image](https://user-images.githubusercontent.com/52088444/158809978-10ae5391-c229-4eb2-bdd4-41c0c600972b.png)
+
+Using Distributed SCS helps resolve some problems common to geographically distributed configurations:
+
+
+-Eliminates false switchovers that occur when SCS disconnects from LCA at a remote site because of a slow network connection between sites or temporary network problems.
+
+- Prevents a single point of failure. A failure of one Distributed SCS only means a temporary loss of control over a subset of Hosts, Applications, and Solutions. Other Solution Control Servers continue to control the rest of the environment.
+
+
+O uso do Distributed SCS ajuda a resolver alguns problemas comuns a configurações distribuídas geograficamente:
+
+
+-Elimina falsas alternâncias que ocorrem quando o SCS se desconecta do LCA em um site remoto devido a uma conexão de rede lenta entre sites ou problemas temporários de rede.
+
+- Evita um único ponto de falha. Uma falha de um SCS Distribuído significa apenas uma perda temporária de controle sobre um subconjunto de Hosts, Aplicativos e Soluções. Outros Servidores de Controle de Solução continuam a controlar o restante do ambiente.
+
+![image](https://user-images.githubusercontent.com/52088444/158810157-1dc9ed9a-2f01-43c5-acec-b79b923eb1f7.png)
+
+A single SCS should be assigned to handle no more than 250 hosts and their applications. In this environment, if you need SCS to handle more than 250 hosts, Genesys recommends that you configure multiple Solution Control Servers in distributed mode to limit the load on each SCS. Refer to the Framework Deployment Guide for information about setting up a distributed SCS environment.
+
+Um único SCS deve ser designado para lidar com não mais de 250 hosts e seus aplicativos. Nesse ambiente, se você precisar que o SCS lide com mais de 250 hosts, a Genesys recomenda que você configure vários Solution Control Servers no modo distribuído para limitar a carga em cada SCS. Consulte o Framework Deployment Guide para obter informações sobre como configurar um ambiente SCS distribuído.
+
+## 5.7 Backup Applications
+
+A complete application failure may result from either an internal defect (for example, an infinite loop) or an external event (for example, a power failure). It may manifest as either a process non-response or termination. Typically, if a solution component stops working, the solution can no longer process customer interactions. 
+
+In all cases, the Backup application is another application of the same type configured and installed to operate as the primary. If you have not configured a backup application for the failed component, the correction procedure normally consists of attempts to restart the failed process.
+
+Uma falha completa do aplicativo pode resultar de um defeito interno (por exemplo, um loop infinito) ou de um evento externo (por exemplo, uma falha de energia). Pode se manifestar como uma não resposta do processo ou rescisão. Normalmente, se um componente da solução parar de funcionar, a solução não poderá mais processar as interações com o cliente.
+
+Em todos os casos, o aplicativo Backup é outro aplicativo do mesmo tipo configurado e instalado para operar como primário. Se você não configurou um aplicativo de backup para o componente com falha, o procedimento de correção normalmente consiste em tentativas de reiniciar o processo com falha.
+
+
+There are three types of Backups:
+- Not Specified (Cold Standby)
+- Warm Standby
+- Hot Standby
+
+With Not Specified or what is sometimes referred to as Cold Standby, the Backup Application would not be running until needed. If the Primary application fails, the Backup is then started. No license is required. Time and data are lost. 
+
+
+Existem três tipos de Backups:
+- Não especificado (espera fria)
+- Espera Quente
+- Hot Standby
+
+Com Não especificado ou o que às vezes é chamado de Cold Standby, o aplicativo de backup não estaria em execução até que fosse necessário. Se o aplicativo Primário falhar, o Backup será iniciado. Nenhuma licença é necessária. Tempo e dados são perdidos.
+
+![image](https://user-images.githubusercontent.com/52088444/158810558-a6417e8c-fc70-41d6-aadd-805a9ea00981.png)
+
+With Warm or Hot Standby, the backup application is already running and ready to take over if the primary fails. These options require a license. 
+
+On the low end of the spectrum, any component failure (and even many planned maintenance tasks) will cause an outage—service availability will be downgraded or lost. 
+
+On the high end, we approach continuous availability where all components have redundancy, all data states are actively replicated, all faults are tolerated, and maintenance activities are undertaken with no impact on the system availability. 
+
+Selecting the appropriate level between these two extremes is a matter of balancing business needs and cost (cost of hardware and software and cost of managing the complexity). What level of availability do you need? Can you afford a 10-minute shutdown or a two-hour shutdown? How frequently (daily, weekly, yearly)? Can you afford to lose a transaction in progress? Can you afford a degradation of service, where calls are routed to a default queue rather than being handled in a more intelligent manner?
+
+Com Warm ou Hot Standby, o aplicativo de backup já está em execução e pronto para assumir o controle se o primário falhar. Essas opções requerem uma licença.
+
+Na extremidade inferior do espectro, qualquer falha de componente (e até mesmo muitas tarefas de manutenção planejadas) causará uma interrupção – a disponibilidade do serviço será rebaixada ou perdida.
+
+No topo, abordamos a disponibilidade contínua onde todos os componentes têm redundância, todos os estados de dados são replicados ativamente, todas as falhas são toleradas e as atividades de manutenção são realizadas sem impacto na disponibilidade do sistema.
+
+Selecionar o nível apropriado entre esses dois extremos é uma questão de equilibrar as necessidades de negócios e os custos (custo de hardware e software e custo de gerenciamento da complexidade). Qual o nível de disponibilidade que você precisa? Você pode pagar um desligamento de 10 minutos ou um desligamento de duas horas? Com que frequência (diariamente, semanalmente, anualmente)? Você pode perder uma transação em andamento? Você pode arcar com uma degradação do serviço, onde as chamadas são roteadas para uma fila padrão em vez de serem tratadas de maneira mais inteligente?
+
+## 5.8 Warm Standby vs. Hot Standby
+
+Warm Standby
+
+In Warm Standby redundancy, a backup server is initialized and running, ready to take over the operations of the primary server. Clients of the primary server already have the connection parameters for the backup server in order to reduce the initialization time should a switchover be necessary. 
+
+Transactions that were in progress during the switchover are lost. In the meantime, recovery efforts continue with respect to the failed server. Once SCS identifies that the failed server is running again, it designates it as the backup server.
+
+Hot Standby 
+
+In hot standby redundancy, a backup server remains initialized, clients connect to both the primary and the backup servers at startup, and the backup server data is synchronized from the primary server. Data synchronization and existing client connections to the backup guarantee higher availability.
+
+Espera Quente
+
+Na redundância Warm Standby, um servidor de backup é inicializado e em execução, pronto para assumir as operações do servidor primário. Os clientes do servidor primário já possuem os parâmetros de conexão do servidor de backup para reduzir o tempo de inicialização caso seja necessária uma alternância.
+
+As transações que estavam em andamento durante a transição são perdidas. Enquanto isso, os esforços de recuperação continuam em relação ao servidor com falha. Depois que o SCS identifica que o servidor com falha está sendo executado novamente, ele o designa como o servidor de backup.
+
+Hot Standby
+
+Na redundância de espera ativa, um servidor de backup permanece inicializado, os clientes se conectam aos servidores primário e de backup na inicialização e os dados do servidor de backup são sincronizados a partir do servidor primário. A sincronização de dados e as conexões de cliente existentes com o backup garantem maior disponibilidade.
+
+## 5.9 Failure Scenario–Warm Standby vs. Hot Standby
+
+In the following diagram, warm standby is represented on the left side and hot standby is represented on the right side. In each standby mode, there is a pair of T-Servers. The first T-Server starts running in Primary mode and the second T-Server starts in backup mode.
+
+A major difference between the two modes of standby is:
+
+- In warm standby mode, the client application only connects to the primary.
+
+- In hot standby mode, the client application connects to both the primary and backup, and the data is synchronized between both T-Servers. Whatever caused the primary to fail, the backup knows what the primary T-Server had in process, and less data is lost.
+
+No diagrama a seguir, o modo de Warm Standby é representado no lado esquerdo e o hot standby é representado no lado direito. Em cada modo de espera, há um par de T-Servers. O primeiro T-Server inicia a execução no modo Primário e o segundo T-Server inicia no modo de backup.
+
+Uma grande diferença entre os dois modos de espera é:
+
+- No warm standby, o aplicativo cliente se conecta apenas ao primário.
+
+- No hot standby , o aplicativo cliente se conecta ao primário e ao backup, e os dados são sincronizados entre os dois T-Servers. O que quer que tenha causado a falha do primário, o backup sabe o que o T-Server primário estava em processo e menos dados são perdidos.
+
+![image](https://user-images.githubusercontent.com/52088444/158811442-2c606f35-622a-4f61-9826-9980c20384fb.png)
+
+![image](https://user-images.githubusercontent.com/52088444/158812002-e35ebed5-22f3-43f6-83e7-bdc4f1e6d30f.png)
+
+## 5.10 Application Switchovers(Trocas de aplicativos)
+
+o Managment Layer também fornece recursos de alternância mais robustos. Existem dois tipos de switchovers (transição):
+
+- Automatic switchover(Troca automática)
+- Manual switchover(Troca manual)
+- Automatic Switchover(Comutação Automática)
+
+Quando um aplicativo informa que seu status mudou para Serviço indisponível e um servidor de backup para esse aplicativo é configurado e iniciado, o Mangment Layer alterna automaticamente as operações para o servidor de backup.
+
+Quando os aplicativos primários e de backup estão sendo executados com o status Serviço indisponível, o aplicativo de backup pode relatar que agora pode fornecer o serviço (ou seja, o status do aplicativo de backup muda para Iniciado). Nesse caso, a camada de gerenciamento alterna automaticamente as operações para o aplicativo de backup.
+
+**Manual Switchover(Troca Manual)**
+
+O Managment Layer fornece uma função de controle adicional, uma alternância manual das operações de um aplicativo para seu aplicativo de backup. Use esta função, por exemplo, para fins de teste, durante atualizações de aplicativos ou durante alguns procedimentos de manutenção de hardware. Você pode realizar uma alternância manual para qualquer par de aplicativos redundantes nos quais o primário e o backup estejam em execução. Durante a alternância, o Managment Layer altera o modo do aplicativo de backup selecionado para primário e o modo do aplicativo primário para backup.
+
+Você não pode alternar manualmente os aplicativos destes tipos:
+
+- Configuration Server
+- Database Access Point
+- Solution Control Server
+
+## 5.11 System Dashboard-Applications Tab(Guia de Aplicativos do Painel do Sistema)
+
+Information related to the primary and backup applications can be seen on the Applications tab of the System Dashboard in GAX. Go to GAX > Dashboard > System > Applications tab. Seen in the following image, you can view the status of an application, as well as use this screen to start and stop the application. There is also a Mode column—this indicates whether the application is currently running in Primary or Backup mode.
+
+As informações relacionadas aos aplicativos primários e de backup podem ser vistas na guia Aplicativos do Painel do Sistema no GAX. Vá para GAX > Painel > Sistema > guia Aplicativos. Visto na imagem a seguir, você pode visualizar o status de um aplicativo, bem como usar esta tela para iniciar e parar o aplicativo. Há também uma coluna Modo — isso indica se o aplicativo está sendo executado no modo Primário ou Backup.
+
+![image](https://user-images.githubusercontent.com/52088444/158813523-65e9a78d-3aeb-4623-bb42-eb130e65d400.png)
+
+![image](https://user-images.githubusercontent.com/52088444/158813780-70ed6984-3f80-4251-baf0-f0271929e052.png)
+
+## 5.12 Learning Summary
+
+Now that you have completed this chapter, you should be able to do the following: 
+
+1 - Recall the major functions of the Management Layer.
+
+2 - Describe the functions of each component of the Management Layer.
+
+3 - Explain the data flow of the Management Layer. 
+
+4 - Explain the options for service availability.
+
+5 - Observe the failover between primary and backup applications.
+
+
+
+Agora que você concluiu este capítulo, você deve ser capaz de fazer o seguinte:
+
+1 - Relembre as principais funções da Camada de Gerenciamento.
+
+2 - Descreva as funções de cada componente da Camada de Gerenciamento.
+
+3 - Explicar o fluxo de dados da Camada de Gerenciamento.
+
+4 - Explique as opções de disponibilidade do serviço.
+
+5 - Observe o failover entre aplicativos primários e de backup.

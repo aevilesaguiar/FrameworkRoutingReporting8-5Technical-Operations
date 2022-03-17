@@ -445,3 +445,31 @@ Agora que você concluiu este capítulo, você deve ser capaz de fazer o seguint
 4 - Explique as opções de disponibilidade do serviço.
 
 5 - Observe o failover entre aplicativos primários e de backup.
+
+## 5.13 Learning Check
+
+![image](https://user-images.githubusercontent.com/52088444/158817081-68b77ce8-7638-4bb3-a3fe-5b8030173b01.png)
+
+
+Question
+02/03
+State whether the following statement is True or False.
+
+The Management Layer detects and corrects situations that might cause problems to the solutions.(A Camada de Gerenciamento detecta e corrige situações que podem causar problemas às soluções.)
+
+True(verdadeiro)
+
+False
+
+Question
+03/03
+Which Application is the heart of the Management Layer?
+
+Message Server
+
+LCA
+
+Solution Control Server (verdadeiro)
+
+GAX
+

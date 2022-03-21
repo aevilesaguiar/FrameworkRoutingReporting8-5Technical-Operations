@@ -32,6 +32,13 @@ The following image outlines Routing architecture — Orchestration/Routing is s
 - URS
 
 
+## 11.8 Learning Check
+
+- Stat Server: Tracks the real-time status of the contact center objects (Rastreia o status em tempo real dos objetos do contact center)
+- Composer: Routing application development tool which generates SCXML.(Ferramenta de desenvolvimento de aplicativos de roteamento que gera SCXML.)
+- 
+
+
 A imagem a seguir descreve a arquitetura de roteamento — a orquestração/roteamento é mostrada em detalhes junto com suas conexões com as camadas de mídia, serviços e configuração da estrutura. O roteamento é composto por:
 
 - Compositor
@@ -464,3 +471,42 @@ Agora que você concluiu este capítulo, você deve ser capaz de fazer o seguint
 4 - Identificar as principais mensagens envolvidas no Roteamento.
 
 
+
+## 11.8 learning check
+
+
+Question
+01/02
+Match each component on the left with the correct statement on the right.
+
+
+- URS: Runs target-seeking algorithms for interaction.
+- T-Server: Notifies URS and ORS that a call has arrived and needs routing.
+- ORS: Fetches and executes SCXML application.
+- Stat Server: Tracks the real-time status of the contact center objects.
+- Web application server: All routing applications must be uploaded to a supported one.
+- Composer: Routing application development tool which generates SCXML.
+
+- URS: executa algoritmos de busca de destino para interação.
+- T-Server: Notifica URS e ORS que uma chamada chegou e precisa de roteamento.
+- ORS: Busca e executa o aplicativo SCXML.
+- Stat Server: rastreia o status em tempo real dos objetos do contact center.
+- Servidor de aplicativos da Web: Todos os aplicativos de roteamento devem ser carregados em um com suporte.
+- Composer: Ferramenta de desenvolvimento de aplicativos de roteamento que gera SCXML.
+- 
+![image](https://user-images.githubusercontent.com/52088444/159289623-1bf58e14-8989-4500-b173-61b7d4e52b27.png)
+
+
+
+Question
+02/02
+Match each routing message on the left with the correct meaning on the right.
+
+
+
+- Processing GET Request, Request sucessful :Messages seen when ORS successfully retrieve application from web application server(Mensagens vistas quando o ORS recupera com sucesso o aplicativo do servidor de aplicativos da web)
+- EventRouteRequest: An interaction has been placed on a routing point and is waiting for routing instructions(Uma interação foi colocada em um ponto de roteamento e está aguardando instruções de roteamento)
+- RequestRouteCall : Instructions to T-Server/SIP Server with results of routing logic(Instruções para T-Server/SIP Server com resultados da lógica de roteamento)
+- EventRouteUsed: An interaction has been routed as requested(Uma interação foi roteada conforme solicitado)
+
+![image](https://user-images.githubusercontent.com/52088444/159289925-37a115d4-87cb-43a4-aed5-fd2b6c19d3df.png)

@@ -517,3 +517,69 @@ SCXML é uma linguagem de marcação baseada em XML (linguagem de máquina de es
 O SCXML fornece a lógica de backbone para aplicativos de orquestração e é gerado usando o Composer. O URS fornece módulos funcionais para obter funções específicas de domínio, como manipulação de filas, eServices e manipulação de interações. O ORS usa esses módulos funcionais do URS para informações de fila, destino e estatísticas.
 
 Depois que o mecanismo SCXML for inicializado, a máquina de estado avança com base nos eventos que são acionados nela. Quando um evento é acionado, se o conjunto atual de estados tem transições esperando por esse evento, e a condição de guarda em uma dessas transições é satisfeita, diz-se que a máquina de estado segue essa transição, o que pode possivelmente produzir um novo conjunto de estados atuais. estados. A maioria das máquinas de estado acabará por atingir um estado final, em que a máquina de estado disse ter executado até a conclusão.
+
+## 12.12 Publish IPD to Config Server(Publicar IPD no Config Server)
+
+![image](https://user-images.githubusercontent.com/52088444/159483597-ea817d14-450e-4f44-a967-d2a49f564d8a.png)
+
+The IPD needs to be published to the configuration server in order to create the representative object in the configuration database.
+- Composer must be connected to the configuration server in order to publish.
+- For an open IPD, you can click the Publish icon. You can also right click on the IPD in the project explorer and choose Publish to the Configuration Server.
+
+
+O IPD precisa ser publicado no servidor de configuração para criar o objeto representativo no banco de dados de configuração.
+- O composer deve estar conectado ao servidor de configuração para poder publicar.
+- Para um IPD aberto, você pode clicar no ícone Publicar. Você também pode clicar com o botão direito do mouse no IPD no gerenciador de projetos e escolher Publicar no servidor de configuração.
+
+**Enhanced Routing Script(Script de roteamento aprimorado)**
+
+The object created is a Script Object (also called Enhanced Routing Script) that represents the Workflow block in the IPD. The name of the script object is recorded in the properties of the Workflow block. In this case, the Object Name is Bankers.default.defaultWorkflow.
+
+In GAX, it is found in Configuration > Environment > Scripts with Script Type SCXML. The properties include many options automatically such as url pointing at the scxml file for the IPD.
+
+The Enhanced Routing Script object contains the URI of the SCXML routing application. Orchestration Server uses this URI to fetch the routing application start page from the web application server. Note that the URI is auto-generated when you publish the IPD diagram. The resulting URI points to the local web server that is configured in the Composer. This URI is suitable for application development and testing. Once the routing application is ready for production, you will need to deploy the routing application project files to the production web application server and change the URI in the corresponding Enhanced Routing Script object.
+
+O objeto criado é um Script Object (também chamado de Enhanced Routing Script) que representa o bloco Workflow no IPD. O nome do objeto de script é registrado nas propriedades do bloco Workflow. Nesse caso, o Nome do Objeto é Bankers.default.defaultWorkflow.
+
+No GAX, encontra-se em Configuration > Environment > Scripts with Script Type SCXML. As propriedades incluem muitas opções automaticamente, como url apontando para o arquivo scxml para o IPD.
+
+O objeto Enhanced Routing Script contém o URI do aplicativo de roteamento SCXML. O Orchestration Server usa esse URI para buscar a página inicial do aplicativo de roteamento do servidor de aplicativos da web. Observe que o URI é gerado automaticamente quando você publica o diagrama IPD. O URI resultante aponta para o servidor web local que está configurado no Composer. Este URI é adequado para desenvolvimento e teste de aplicativos. Quando o aplicativo de roteamento estiver pronto para produção, você precisará implantar os arquivos de projeto do aplicativo de roteamento no servidor de aplicativos da Web de produção e alterar o URI no objeto Script de roteamento aprimorado correspondente.
+
+## 12.13 Load Application on a DN
+
+![image](https://user-images.githubusercontent.com/52088444/159485189-b0448ea2-00b6-4974-a8bb-37e9d31b3ea2.png)
+
+In GAX, go to Configuration > Switching > DNs Edit the desired routing point (DN). In the options tab, an option is used to specify the name of the routing application script object. If the option already exists, you can simply modify its value. Otherwise, you need to add the option:
+
+- Section: Orchestration
+- Key/Option: application
+- Value: script:[nameOfScriptObject]
+
+No GAX, vá para Configuration > Switching > DNs Edite o ponto de roteamento (DN) desejado. Na guia de opções, uma opção é usada para especificar o nome do objeto de script do aplicativo de roteamento. Se a opção já existir, você pode simplesmente modificar seu valor. Caso contrário, você precisa adicionar a opção:
+
+- Seção: Orquestração
+- Chave/Opção: aplicação
+- Valor: script:[nameOfScriptObject]
+
+## 12.14 Export/Import
+
+Diagrams saved as templates can be exported to/imported from the file system.
+
+Diagramas salvos como modelos podem ser exportados/importados do sistema de arquivos.
+
+![image](https://user-images.githubusercontent.com/52088444/159485545-4514cc7d-5fb6-481b-b940-854a24d3c0ed.png)
+
+Once your application has been unit tested you will need to save it as a template for deployment to another web application server. In Composer this process involves:
+
+- Exporting a Diagram Template (Project) to the File System
+- Importing a Diagram Template (Project)
+
+Export allows you to package a project so you can use it elsewhere. It allows you to use existing saved projects so you can import to another composer application or import to another Web Application Server. For example, you may need to move a project to a production server or give a project to another developer who uses a different environment. If you export a .zip file and give it to another developer, that developer can then import the .zip file.
+
+Depois que seu aplicativo tiver sido testado na unidade, você precisará salvá-lo como um modelo para implantação em outro servidor de aplicativos da web. No Composer esse processo envolve:
+
+- Exportando um modelo de diagrama (projeto) para o sistema de arquivos
+- Importando um modelo de diagrama (projeto)
+
+Exportar permite empacotar um projeto para que você possa usá-lo em outro lugar. Ele permite que você use projetos salvos existentes para que você possa importar para outro aplicativo compositor ou importar para outro Servidor de Aplicativos Web. Por exemplo, você pode precisar mover um projeto para um servidor de produção ou entregar um projeto a outro desenvolvedor que usa um ambiente diferente. Se você exportar um arquivo .zip e entregá-lo a outro desenvolvedor, esse desenvolvedor poderá importar o arquivo .zip file
+

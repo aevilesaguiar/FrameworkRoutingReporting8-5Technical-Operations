@@ -583,3 +583,136 @@ Depois que seu aplicativo tiver sido testado na unidade, você precisará salvá
 
 Exportar permite empacotar um projeto para que você possa usá-lo em outro lugar. Ele permite que você use projetos salvos existentes para que você possa importar para outro aplicativo compositor ou importar para outro Servidor de Aplicativos Web. Por exemplo, você pode precisar mover um projeto para um servidor de produção ou entregar um projeto a outro desenvolvedor que usa um ambiente diferente. Se você exportar um arquivo .zip e entregá-lo a outro desenvolvedor, esse desenvolvedor poderá importar o arquivo .zip file
 
+Note: When you export a routing application, export does not package configuration objects such as agents and agent groups used in Target blocks. If they do not exist in the new environment, for example, if you export a .zip file and plan to import it into a different environment, you will need to create these configuration objects.
+
+Nota: Ao exportar um aplicativo de roteamento, a exportação não empacota objetos de configuração, como agentes e grupos de agentes usados em blocos de destino. Se eles não existirem no novo ambiente, por exemplo, se você exportar um arquivo .zip e planejar importá-lo para um ambiente diferente, será necessário criar esses objetos de configuração.
+
+
+## 12.15 Export/Import Zip
+
+
+**Exporting a Diagram Template (Project) [Exportando um modelo de diagrama (projeto)]**
+
+In Project Explorer, right-click the diagram in the Workflows, you can choose to export to an Archive File. It can export to a zip or tar file. You can choose one or more projects to include in the export.
+
+If you want to deploy a Java project, you can use the export function to create a WAR file.
+
+No Project Explorer, clique com o botão direito do mouse no diagrama nos fluxos de trabalho, você pode optar por exportar para um arquivo morto. Ele pode exportar para um arquivo zip ou tar. Você pode escolher um ou mais projetos para incluir na exportação.
+
+Se você deseja implementar um projeto Java, pode usar a função de exportação para criar um arquivo WAR.
+
+![image](https://user-images.githubusercontent.com/52088444/159695884-5b516ed7-36d9-4308-80c3-bbac65720696.png)
+
+
+For a zip or tar file, under General, choose the export destination of Archive File. 
+
+For a WAR file, under Composer, choose the export destination of Java Composer Project as a WAR file.
+
+Para um arquivo zip ou tar, em Geral, escolha o destino de exportação do Arquivo morto.
+
+Para um arquivo WAR, em Composer, escolha o destino de exportação do Java Composer Project como um arquivo WAR.
+
+![image](https://user-images.githubusercontent.com/52088444/159699768-9a5b2aae-ab2d-4b67-8eb0-93b5b45b59d5.png)
+
+**Importing a Diagram Template (Project)[Importando um modelo de diagrama (projeto)]**
+
+Using File > Import, you can import the exported project. Instead of choosing the option to import an archive file, under General you can choose to import Existing Projects into Workspace. After browsing the desired archive file, you can then check the boxes for the projects to be imported.
+
+Usando Arquivo > Importar, você pode importar o projeto exportado. Em vez de escolher a opção de importar um arquivo morto, em Geral, você pode optar por importar projetos existentes para o espaço de trabalho. Depois de navegar no arquivo desejado, você pode marcar as caixas dos projetos a serem importados.
+
+
+WAR means Web Application Archive.
+
+WAR significa Arquivo de Aplicativo da Web.
+
+## 12.16 Deploy to Production
+
+![image](https://user-images.githubusercontent.com/52088444/159700104-cf23f70c-0ba6-49ed-812a-1221446519c8.png)
+
+
+**Java Project Deployment in Production (**Implantação do Projeto Java em Produção**)**
+
+If you are deploying a Java project in production, you take the following steps:
+
+1 - Create a WAR file—In Composer, you export the project as a WAR file.
+
+2 - Deploy WAR file—On the Web Application Server, you deploy the application. (This step may vary depending on the server. We use Tomcat as an example in the classroom.)
+
+3 - Add MIME types—You may need to take this step depending on your Web Application Server. In the classroom, we use Tomcat that does not need additional configuration.
+
+4 - Change the Enhanced Routing Script object’s URI—In Genesys Administrator, change the host name and port for the SCXML to be the production server (and not the bundled Tomcat).
+
+
+
+Se você estiver implantando um projeto Java em produção, siga estas etapas:
+
+1 - Crie um arquivo WAR—No Composer, você exporta o projeto como um arquivo WAR.
+
+2 - Implantar arquivo WAR—No Web Application Server, você implanta o aplicativo. (Esta etapa pode variar dependendo do servidor. Usamos o Tomcat como exemplo na sala de aula.)
+
+3 - Adicionar tipos MIME—Pode ser necessário executar esta etapa dependendo do seu servidor de aplicativos da Web. Na sala de aula, usamos o Tomcat que não precisa de configuração adicional.
+
+4 - Altere o URI do objeto Enhanced Routing Script — No Genesys Administrator, altere o nome do host e a porta do SCXML para ser o servidor de produção (e não o Tomcat incluído).
+
+.NET Project Deployment in Production (Implantação de Projeto .NET em Produção)
+
+If you are deploying a .NET project in production, the process starts with exporting the project. You export a .NET project as a file system. Here are the main steps:
+
+1 - Export the project as a file system.
+
+2 - Copy the exported folder to the production machine.
+
+3 - Configure a virtual directory and IIS:
+
+     - Create a virtual directory in IIS for the exported folder. In the virtual directory, enable ASP.NET (if necessary) and provide scripts with execute permission (if necessary).
+
+4- Change the Enhanced Routing Script object’s URI to go to the production IIS.
+
+
+
+
+Se você estiver implantando um projeto .NET em produção, o processo começa com a exportação do projeto. Você exporta um projeto .NET como um sistema de arquivos. Aqui estão os principais passos:
+
+1 - Exporte o projeto como um sistema de arquivos.
+
+2 - Copie a pasta exportada para a máquina de produção.
+
+3 - Configure um diretório virtual e IIS:
+
+      - Crie um diretório virtual no IIS para a pasta exportada. No diretório virtual, habilite o ASP.NET (se necessário) e forneça scripts com permissão de execução (se necessário).
+
+4- Altere o URI do objeto Enhanced Routing Script para ir para o IIS de produção.
+
+## 12.17 Learning Summary
+
+Now that you have completed this chapter, you should be able to do the following: 
+
+1 - Describe basic Composer concepts.
+
+2 - Generate code for a routing application.
+
+3 - Define State Chart XML (SCXML).
+
+4 - Publish a routing application to the Configuration Layer.
+
+5 - Load a routing application on a DN.
+
+6 - Explain deploying a routing application to production.
+
+7 - Import a Composer routing application.
+
+Agora que você concluiu este capítulo, você deve ser capaz de fazer o seguinte:
+
+1 - Descrever os conceitos básicos do Composer.
+
+2 - Gerar código para uma aplicação de roteamento.
+
+3 - Defina o XML do gráfico de estado (SCXML).
+
+4 - Publique um aplicativo de roteamento na Camada de Configuração.
+
+5 - Carregue um aplicativo de roteamento em um DN.
+
+6 - Explicar a implantação de um aplicativo de roteamento para produção.
+
+7 - Importe um aplicativo de roteamento Composer.
